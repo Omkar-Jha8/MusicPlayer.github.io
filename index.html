@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Jost&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://kit.fontawesome.com/0c8026b364.js" crossorigin="anonymous"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Music Player-Meet With Your Soul</title>
+</head>
+
+<body>
+    <div class="nav">
+        <nav>
+            <ul class="nav">
+                <img class="logo" src="logo-removebg-preview(1).png" alt="">
+                <li>Home</li>
+                <a href="mailto:omforweb75@gmail.com">
+                    <li>Contact Us</li>
+                </a>
+            </ul>
+        </nav>
+    </div>
+    <div class="main">
+        <div class="container">
+            <h2>RISE UP</h2>
+            <h3>Fat Rat</h3>
+            <img class="music-logo" src="logo-removebg-preview(1).png" alt="">
+            <audio class="music" src="Rise Up.mp3"></audio>
+            <div class="font-awesome">
+                <i class="fas fa-backward" id="previous" title="Backward"></i>
+                <i class="fas fa-play" id="play" title="Play"></i>
+                <i class="fas fa-forward" id="next" title="Forward"></i>
+            </div>
+
+        </div>
+    </div>
+    <script>
+        const play = document.getElementById('play')
+        const music = document.querySelector('audio')
+        const logo = document.querySelector('.music-logo')
+        const musicName = document.querySelector('h2')
+        const musicCompany = document.querySelector('h3')
+        const next = document.querySelector('#next')
+        const previous = document.querySelector('#previous')
+
+        const songs = [{
+            name: 'Rise Up.mp3',
+            title: 'Rise Up',
+            artist: 'Fat Rat'
+        }, {
+            name: 'Sub Urban - Cradles.mp3',
+            title: 'CRADELS',
+            artist: 'Beach Bunny'
+        }, {
+            name: 'Beach Bunny- Cloud 9.mp3',
+            title: 'CLOUD 9',
+            artist: 'Beach Bunny'
+        }, {
+            name: 'Unknown+Brain+Superhero+feat+Chris+Linton+NCS+Release].mp3',
+            title: 'SUPERHEROES',
+            artist: 'Unknown Brains'
+        }]
+
+        let isplaying = false;
+
+        const playmusic = () => {
+            isplaying = true;
+            music.play()
+            play.classList.replace('fa-play', 'fa-pause')
+            logo.classList.add('anime')
+        };
+        const pausemusic = () => {
+            isplaying = false;
+            music.pause()
+            play.classList.replace('fa-pause', 'fa-play')
+            logo.classList.remove('anime')
+        }
+        play.addEventListener('click', () => {
+            if (isplaying) {
+                pausemusic()
+            } else {
+                playmusic()
+            }
+        })
+        const playsong = (songs) => {
+            musicName.textContent = songs.title;
+            musicCompany.textContent = songs.artist;
+            music.src = songs.name
+        };
+        playsong(songs[0]);
+        num = 0;
+        const nextsong = () => {
+            num = (num + 1) % songs.length
+            playsong(songs[num])
+            music.play()
+            play.classList.replace('fa-play', 'fa-pause')
+            logo.classList.add('anime')
+
+
+        }
+        const prevsong = () => {
+            num = ((num - 1) + songs.length) % songs.length
+            playsong(songs[num])
+            music.play()
+            play.classList.replace('fa-play', 'fa-pause')
+            logo.classList.add('anime')
+        }
+        next.addEventListener('click', nextsong)
+        previous.addEventListener('click', prevsong)
+    </script>
+</body>
+
+</html>
